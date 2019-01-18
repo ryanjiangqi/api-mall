@@ -21,7 +21,7 @@ class ProductController extends Controller
 
     public function product(Request $request)
     {
-        $list=Product::get();
+        $list=Product::where(['status'=>'上架'])->get();
         return success($list);
     }
 }
