@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Pitems;
 use App\Models\Product;
+use Illuminate\Support\Facades\Log;
+
 class ProductController extends Controller
 {
     public function items(Request $request)
@@ -19,7 +21,7 @@ class ProductController extends Controller
 
     public function product(Request $request)
     {
-        $list=Product::paginate(3);
+        $list=Product::get();
         return success($list);
     }
 }
