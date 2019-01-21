@@ -65,7 +65,7 @@ class Product extends Model
                     $product['sku']['list'][$ks]['s' . $skuAttrParent['attribute_id']] = $items;
                 }
                 $skuImage[$ks]['string'] = explode(',', $vs['attribute_id']);
-                $skuImage[$ks]['image'] = $_SERVER['HTTP_HOST'] . '/static/uploadfile/100x100/' . $vs['image'];
+                $skuImage[$ks]['image'] = config('view.imageUrl') . '/100x100/' . $vs['image'];
             }
         }
         $itemsInfo = Pitems::find($info['items_id']);
@@ -84,7 +84,7 @@ class Product extends Model
                     $product['sku']['tree'][$key]['v'][$k]['imgUrl'] = '';
                     foreach ($skuImage ?? [] as $valImg) {
                         if (in_array($v['id'], $valImg['string'])) {
-                            $product['sku']['tree'][$key]['v'][$k]['imgUrl'] = $valImg['image'];
+                            $product['sku']['tree'][$key]['v'][$k]['imgUrl'] = config('view.imageUrl') . '/100x100/' . $valImg['image'];
                         }
                     }
                 }

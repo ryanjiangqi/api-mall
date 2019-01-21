@@ -29,5 +29,6 @@ return [
     */
 
     'compiled' => realpath(storage_path('framework/views')),
+    'imageUrl'=>'http://120.77.146.13:8081/static/uploadfile/',
 
 ];
