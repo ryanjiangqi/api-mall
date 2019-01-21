@@ -60,9 +60,9 @@ class Product extends Model
                 $product['sku']['list'][$ks]['combin_sku'] = false;
                 $product['sku']['list'][$ks]['goods_id'] = $info['id'];
                 $skuAttr = explode(',', $vs['attribute_id']);
-                foreach ($skuAttr as $items) {
+                foreach ($skuAttr as $keys => $items) {
                     $skuAttrParent = Pattribute::find($items);
-                    $product['sku']['list'][$ks]['s' . $skuAttrParent['attribute_id']] = $items;
+                    $product['sku']['list'][$ks]['s' . ($keys + 1)] = $items;
                 }
                 $skuImage[$ks]['string'] = explode(',', $vs['attribute_id']);
                 $skuImage[$ks]['image'] = config('view.imageUrl') . '/100x100/' . $vs['image'];
@@ -76,7 +76,7 @@ class Product extends Model
                 $attrChild = Pattribute::where(['attribute_id' => $value])->get();
                 $product['sku']['tree'][$key]['k'] = $attrParent['attribute_value'];
                 $product['sku']['tree'][$key]['k_id'] = $attrParent['id'];
-                $product['sku']['tree'][$key]['k_s'] = 's' . $attrParent['id'];
+                $product['sku']['tree'][$key]['k_s'] = 's' . ($key + 1);
                 $product['sku']['tree'][$key]['count'] = 10000;
                 foreach ($attrChild as $k => $v) {
                     $product['sku']['tree'][$key]['v'][$k]['id'] = $v['id'];
