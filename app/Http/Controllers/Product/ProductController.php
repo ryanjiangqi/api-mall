@@ -21,7 +21,15 @@ class ProductController extends Controller
 
     public function product(Request $request)
     {
-        $list=Product::where(['status'=>'上架'])->get();
+        $list = Product::where(['status' => '上架'])->get();
         return success($list);
+    }
+
+    public function productDetail(Request $request)
+    {
+        $id = $request->input("id");
+        $id=77;
+        $data = Product::detail($id);
+        return success($data);
     }
 }
