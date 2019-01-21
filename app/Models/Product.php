@@ -28,7 +28,7 @@ class Product extends Model
         $product['is_virtual'] = 0;
         $product['quota_used'] = 0;
         $product['goods_info']['title'] = $info['name'];
-        $product['goods_info']['picture'] = $_SERVER['HTTP_HOST'] . '/static/uploadfile/100x100/' . $info['cover_image'];
+        $product['goods_info']['picture'] = config('view.imageUrl') . '/100x100/' . $info['cover_image'];
         $product['goods_info']['price'] = $info['price'];
         $product['goods_info']['origin'] = 0;
         $product['goods_info']['keyword'] = $info['keyword'];
