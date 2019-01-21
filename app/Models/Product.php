@@ -65,7 +65,7 @@ class Product extends Model
                     $product['sku']['list'][$ks]['s' . $skuAttrParent['attribute_id']] = $items;
                 }
                 $skuImage[$ks]['string'] = explode(',', $vs['attribute_id']);
-                $skuImage[$ks]['image'] = $vs['image'];
+                $skuImage[$ks]['image'] = $_SERVER['HTTP_HOST'] . '/static/uploadfile/100x100/' . $vs['image'];
             }
         }
         $itemsInfo = Pitems::find($info['items_id']);
