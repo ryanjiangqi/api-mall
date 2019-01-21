@@ -84,7 +84,7 @@ class Product extends Model
                     $product['sku']['tree'][$key]['v'][$k]['imgUrl'] = '';
                     foreach ($skuImage ?? [] as $valImg) {
                         if (in_array($v['id'], $valImg['string'])) {
-                            $product['sku']['tree'][$key]['v'][$k]['imgUrl'] = config('view.imageUrl') . '/100x100/' . $valImg['image'];
+                            $product['sku']['tree'][$key]['v'][$k]['imgUrl'] = $valImg['image'];
                         }
                     }
                 }
