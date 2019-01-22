@@ -33,6 +33,7 @@ class Product extends Model
         $product['goods_info']['origin'] = 0;
         $product['goods_info']['keyword'] = $info['keyword'];
         $product['goods_info']['description'] = $info['description'];
+        $product['goods_info']['image'] = explode(',',$info['image']);
 
         $product['sku']['price'] = $info['price'];
         $product['sku']['stock_num'] = $skuTotal ?? 0;

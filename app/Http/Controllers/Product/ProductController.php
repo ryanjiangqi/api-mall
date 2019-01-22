@@ -28,7 +28,6 @@ class ProductController extends Controller
     public function productDetail(Request $request)
     {
         $id = $request->input("id");
-        $id=77;
         $data = Product::detail($id);
         return success($data);
     }
