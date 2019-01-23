@@ -17,6 +17,9 @@ Route::put('login', '\Laravel\Passport\Http\Controllers\AccessTokenController@is
 //前台路由
 Route::post('items', 'Product\ProductController@items');
 Route::post('product', 'Product\ProductController@product');
+Route::post('product/index', 'Product\ProductController@productIndex');
 Route::post('product/detail', 'Product\ProductController@productDetail');
+Route::post('items/child','Product\ProductController@itemsChild');
+Route::post('banner','Product\ProductController@bannerIndex');
 
 
