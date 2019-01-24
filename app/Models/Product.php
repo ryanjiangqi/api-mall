@@ -33,7 +33,7 @@ class Product extends Model
         $product['goods_info']['origin'] = 0;
         $product['goods_info']['keyword'] = $info['keyword'];
         $product['goods_info']['description'] = $info['description'];
-        $product['goods_info']['image'] = explode(',',$info['image']);
+        $product['goods_info']['image'] = explode(',', $info['image']);
 
         $product['sku']['price'] = $info['price'];
         $product['sku']['stock_num'] = $skuTotal ?? 0;
@@ -72,7 +72,11 @@ class Product extends Model
         $itemsInfo = Pitems::find($info['items_id']);
         if ($itemsInfo['attribute_id']) {
             $attrList = explode(',', $itemsInfo['attribute_id']);
-            foreach ($attrList as $key => $value) {
+            $list = Pattribute::whereIn('id', $attrList)->orderBy('show_image', 'desc')->get()->toArray();
+            foreach ($list as $items) {
+                $listArray[] = $items['id'];
+            }
+            foreach ($listArray as $key => $value) {
                 $attrParent = Pattribute::find($value);
                 $attrChild = Pattribute::where(['attribute_id' => $value])->get();
                 $product['sku']['tree'][$key]['k'] = $attrParent['attribute_value'];
