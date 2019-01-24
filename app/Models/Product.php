@@ -46,6 +46,14 @@ class Product extends Model
         $product['sku']['hide_stock'] = false;
         $product['sku']['messages'] = [];
         $sku = ProductSku::where(['product_id' => $info['id']])->get();
+        $itemsInfo = Pitems::find($info['items_id']);
+        if ($itemsInfo['attribute_id']) {
+            $attrList = explode(',', $itemsInfo['attribute_id']);
+            $list = Pattribute::whereIn('id', $attrList)->orderBy('show_image', 'desc')->get()->toArray();
+            foreach ($list as $items) {
+                $listArray[] = $items['id'];
+            }
+        }
         if ($sku) {
             foreach ($sku as $ks => $vs) {
                 $product['sku']['list'][$ks]['id'] = $vs['id'];
@@ -63,19 +71,19 @@ class Product extends Model
                 $skuAttr = explode(',', $vs['attribute_id']);
                 foreach ($skuAttr as $keys => $items) {
                     $skuAttrParent = Pattribute::find($items);
-                    $product['sku']['list'][$ks]['s' . ($keys + 1)] = $items;
+                    foreach ($listArray as $key=>$val){
+                        if($skuAttrParent['attribute_id']==$val){
+                            $keyFors=$key;
+                        }
+                    }
+                    $product['sku']['list'][$ks]['s' . ($keyFors + 1)] = $items;
                 }
                 $skuImage[$ks]['string'] = explode(',', $vs['attribute_id']);
                 $skuImage[$ks]['image'] = config('view.imageUrl') . '/100x100/' . $vs['image'];
             }
         }
-        $itemsInfo = Pitems::find($info['items_id']);
+
         if ($itemsInfo['attribute_id']) {
-            $attrList = explode(',', $itemsInfo['attribute_id']);
-            $list = Pattribute::whereIn('id', $attrList)->orderBy('show_image', 'desc')->get()->toArray();
-            foreach ($list as $items) {
-                $listArray[] = $items['id'];
-            }
             foreach ($listArray as $key => $value) {
                 $attrParent = Pattribute::find($value);
                 $attrChild = Pattribute::where(['attribute_id' => $value])->get();
