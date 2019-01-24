@@ -22,4 +22,7 @@ Route::post('product/detail', 'Product\ProductController@productDetail');
 Route::post('items/child','Product\ProductController@itemsChild');
 Route::post('banner','Product\ProductController@bannerIndex');
 
+Route::post('cart/add','Product\ProductController@cartAdd');
+Route::post('cart/list','Product\ProductController@cartList');
+
 
