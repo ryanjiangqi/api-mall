@@ -88,10 +88,17 @@ class ProductController extends Controller
             foreach ($att as $item) {
                 $string = $string . ' ' . $item['name'];
             }
-            $info=Product::find($val['product_id']);
+            $info = Product::find($val['product_id']);
             $cart[$key]['att_name'] = $string;
             $cart[$key]['product_name'] = $info['name'];
         }
         return success($cart);
+    }
+
+    public function cartDel(Request $request)
+    {
+        $id = $request->input("id");
+        Cart::destroy($id);
+        return success();
     }
 }
